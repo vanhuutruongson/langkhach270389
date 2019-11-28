@@ -1,4 +1,4 @@
-hostname = avatar-nct.nixcdn.com,  spclient.wg.spotify.com, *.googlevideo.com, oa.zalo.me, vsco.co, api.gyrosco.pe, origin-prod-phoenix.jibjab.com, api.termius.com, api.picsart.com, api.unfold.app, viva-asia1.vvbrd.com, graph.nhaccuatui.com, api.memrise.com , buy.itunes.apple.com, api.sync.me, pool.elsanow.io, lambda.us-east-1.amazonaws.com, api.mondlylanguages.com, api.busuu.com, owa.videoshowiosglobalserver.com:8095, accounts.elevateapp.net, purchases.ws.pho.to, api-intl.mr.meitu.com, bmall.camera360.com, api.tv.zing.vn, api.calm.com, www.calm.com, api.global.mp3.zing.vn, apimboom2.globaldelight.net, photos.adobe.io, license.pdfexpert.com, subs.platforms.team, apic.musixmatch.com, api.getmimo.com, api.revenuecat.com, 
+hostname = avatar-nct.nixcdn.com,  spclient.wg.spotify.com, *.googlevideo.com, oa.zalo.me, vsco.co, api.gyrosco.pe, origin-prod-phoenix.jibjab.com, api.termius.com, api.picsart.com, api.unfold.app, viva-asia1.vvbrd.com, graph.nhaccuatui.com, api.memrise.com , buy.itunes.apple.com, api.sync.me, pool.elsanow.io, lambda.us-east-1.amazonaws.com, api.mondlylanguages.com, api.busuu.com, owa.videoshowiosglobalserver.com:8095, accounts.elevateapp.net, purchases.ws.pho.to, api-intl.mr.meitu.com, bmall.camera360.com, api.tv.zing.vn, api.calm.com, www.calm.com, api.global.mp3.zing.vn, apimboom2.globaldelight.net, photos.adobe.io, license.pdfexpert.com, subs.platforms.team, apic.musixmatch.com, api.getmimo.com, api.revenuecat.com, engbright.com, api.lingokids.com, www.peacefulsoundsapp.com, duolingo-leaderboards-prod.duolingo.com, commerce-i18n-api.faceu.mobi, mobile-api.adguard.com, api.blinkist.com, api.sololearn.com, api-kinemaster-assetstore.nexstreaming.com, api.pushover.net, ap*.intsig.net, api.overhq.com, receipt-validator.herewetest.com, lcs-mobile-cops.adobe.io, education.github.com, backend.getdrafts.com, 
 
 # vsco
 ^https?:\/\/vsco\.co\/api\/subscriptions\/2.1\/user-subscriptions\/ url script-response-body vsco.js
@@ -22,15 +22,13 @@ https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body T
 ^https:\/\/graph\.nhaccuatui\.com\/.*\/users\/info* url script-response-body nhaccuatui.js
 
 #Memrise
-^https:\/\/api\.memrise\.com\/v1\.16\/me\/$|dashboard\/$ url response-body "is_pro":false response-body "is_pro":true
-
-^https:\/\/api\.memrise\.com\/v1\.16\/(dashboard\/$|leaderboards\/following\/) url script-response-body memrise.vip.js
+^https:\/\/api\.memrise\.com\/v1\.16\/(me\/$|dashboard\/$|leaderboards\/following\/) url script-response-body memrise.vip.js
 
 # Jibjab
 ^https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user$ url script-response-body jibjab.vip.js
 
 #buyhack
-^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body buy.itunes.apple.com.js
+^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body verify_receipt.js
 
 #sync
 ^https:\/\/api\.sync\.me\/api\/purchases\/(report_purchases|get_purchases)  url script-response-body syn.me.js
@@ -72,16 +70,16 @@ https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body T
 ^https:\/\/www\.calm\.com\/mobile\/manage-subscription\?token=*  url reject-img
 
 #lightroom
-^https:\/\/photos\.adobe\.io\/v2\/accounts* url response-body "status":.* response-body "status":"subscriber","current_subs":{"product_id":"lightroom","store":"adobe","purchase_date":"2019-10-10T16:32:10.254954Z","sao":{"inpkg_CCES":"0","inpkg_CCLE":"1","inpkg_CCSN":"0","inpkg_CCSV":"0","inpkg_LCCC":"0","inpkg_LPES":"0","inpkg_LRBRL":"0","inpkg_LRMAC":"0","inpkg_LRMC":"0","inpkg_LRMP":"0","inpkg_LRTB":"0","inpkg_PHLT":"0","inpkg_PHLT2":"0","inpkg_PLES":"0","storage_quota":"100"}},"storage":{"used":0,"limit":1154487209165,"display_limit":1099511627776,"warn":992137445376}},"avatar":{"placeholder":true}}
+^https:\/\/photos\.adobe\.io\/v2\/accounts* url script-response-body Lightroom.js
 
 #Pdfexpert
-^https:\/\/license\.pdfexpert\.com\/api\/1\.0\/pdfexpert6\/subscription\/refresh$ url script-response-body Pdfexpert.vip.js
+^https:\/\/license\.pdfexpert\.com\/api\/1\.0\/pdfexpert6\/subscription\/(refresh$|check$) url script-response-body Pdfexpert.vip.js
 
 #productive
 ^https:\/\/subs\.platforms\.team\/apple\/verifyTransaction$ url script-response-body productive.js
 
 #Musixmatch
-^https:\/\/apic\.musixmatch\.com\/ws\/.*\/(user|config)\.get url script-response-body musixmatch.miao.js
+^https:\/\/apic\.musixmatch\.com\/ws\/.*\/config\.get url script-response-body musixmatch.miao.js
 
 #boom
 ^https:\/\/apimboom2\.globaldelight\.net\/itunesreceipt_v2\.php$ url 302 https://raw.githubusercontent.com/langkhach270389/Scripting/master/boom.vip.rsp
@@ -91,3 +89,60 @@ https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body T
 
 #mojo
 ^https:\/\/api\.revenuecat\.com\/v1\/receipts$ url script-response-body mojo.vip.js
+
+#Bright
+^https:\/\/engbright\.com\/app-portal\/apple\/receipt$ url 302 https://raw.githubusercontent.com/langkhach270389/Scripting/master/Bright.rsp
+
+#lingokids
+^https:\/\/api\.lingokids\.com\/v1\/renovate_session$ url script-response-body lingokids.vip.js
+
+#musicalm
+^https:\/\/www\.peacefulsoundsapp\.com\/api\/v1\/init$ url script-response-body musicalm.js
+
+#duolingo
+^https:\/\/duolingo-leaderboards-prod\.duolingo\.com\/leaderboards* url script-response-body duolingo.js
+
+#ulike
+^https:\/\/commerce-i18n-api\.faceu\.mobi\/commerce\/v1\/subscription\/user_info$ url script-response-body ulike.js
+
+#adguardpremium
+^https:\/\/mobile-api\.adguard\.com\/api\/1\.0\/ios_validate_receipt$ url 302 https://raw.githubusercontent.com/langkhach270389/Scripting/master/Adguard.rsp
+
+#zingmp3
+^https:\/\/api\.global\.mp3\.zing\.vn\/1\.0\/getUserInfo\?data=* url script-response-body zingmp3.js
+
+#Blinkist
+^https:\/\/api\.blinkist\.com\/v4\/(me$|me.json$|me\/access$) url script-response-body blinkist.js
+
+#sololearn 
+^https:\/\/api\.sololearn\.com\/(Profile\/GetProfile$|authenticateDevice$) url script-response-body sololearn.js
+
+ #kinemaster
+^https:\/\/api-kinemaster-assetstore\.nexstreaming\.com\/.*\/product\/verifyReceipt$ url script-response-body kinemaster.js
+
+#pushover
+^https:\/\/api\.pushover\.net\/1\/messages\.json* url script-response-body pushover.js
+
+#CamScanner
+^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\? url script-response-body CamScaner.js
+
+#over
+^https:\/\/api\.overhq\.com\/(user\/token\/refresh$|subscription\/verifyReceipt$) url script-response-body over.vip.js
+
+#1blocker
+^https:\/\/api\.revenuecat\.com\/.*\/subscribers\/[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$ url script-response-body 1blocker.js
+
+#speak&translate
+^https:\/\/receipt-validator\.herewetest\.com\/apple\/verifyTransaction$ url script-response-body speak&translate.js
+
+#document
+^https:\/\/license\.pdfexpert\.com\/api\/.*\/documents\/subscription\/(refresh$|check$) url script-response-body documents.js
+
+#workingcopy
+^https:\/\/education\.github\.com\/api\/user$ url script-response-body workingcopy.js
+
+#draft
+^https:\/\/backend\.getdrafts\.com\/api\/.*\/verification* url script-response-body draft.js
+
+#photoshop_ipad
+;^https:\/\/lcs-mobile-cops\.adobe\.io\/mobile_profile\/nul\/v1$ url script-response-body url script-response-body photoshop.js
